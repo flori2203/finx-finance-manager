@@ -19,6 +19,6 @@ app.get('/', (req, res) => {
   res.send({ message: 'Startseite' });
 });
 
-app.listen(5000, () => {
+app.listen(3000, () => {
   console.log(`Server is running`);
 });
