@@ -50,6 +50,14 @@
           "buildTarget": "api:build:production"
         }
       }
+    },
+    "dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/api",
+        "commands": ["nodemon src/main.ts"],
+        "parallel": false
+      }
     }
   },
   "tags": []
