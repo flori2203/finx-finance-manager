@@ -1,4 +1,5 @@
 import express from 'express';
+import { initalSetup } from './initialSetup';
 import cookieParser from 'cookie-parser';
 import { router as loginRouter } from './routes/login';
 import { router as secretRouter } from './routes/secret';
@@ -11,6 +12,7 @@ app.use(
     extended: true,
   })
 );
+initalSetup();
 
 app.use('/login', loginRouter);
 app.use('/secret', secretRouter);

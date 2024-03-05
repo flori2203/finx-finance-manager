@@ -1,16 +1,28 @@
 import jwt from 'jsonwebtoken';
 import express from 'express';
+import { prisma } from '../prisma';
 
 export const router = express.Router();
 
-const getUser = async (username) => {
-  return { userId: 123, password: '123456', username };
+const getUserFromDb = async (username: string) => {
+  const user = await prisma.user.findFirst({
+    where: {
+      name: username,
+    },
+  });
+  return user;
 };
 
 router.post('/', async (req, res) => {
   const { username, password } = req.body;
 
-  const user = await getUser(username);
+  const user = await getUserFromDb(username);
+
+  if (user === null) {
+    return res.status(404).json({
+      error: 'invalid username',
+    });
+  }
 
   if (user.password !== password) {
     return res.status(403).json({
