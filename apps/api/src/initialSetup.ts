@@ -1,4 +1,4 @@
-import { prisma } from './prisma';
+import { prisma } from './contexts/prisma';
 
 export const initalSetup = async () => {
   const userAmount = await prisma.user.count();

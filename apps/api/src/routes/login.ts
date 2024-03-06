@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import express from 'express';
-import { prisma } from '../prisma';
+import { prisma } from '../contexts/prisma';
 
 export const router = express.Router();
 
