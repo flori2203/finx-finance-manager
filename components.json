@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": false,
+  "tsx": true,
+  "tailwind": {
+    "config": "apps/app/tailwind.config.js",
+    "css": "apps/app/src/tailwind.css",
+    "baseColor": "stone",
+    "cssVariables": true
+  },
+  "aliases": {
+    "components": "@finx-finance-manager/shadcn/components",
+    "utils": "@finx-finance-manager/shadcn/utils"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@finx-finance-manager/shadcn": ["libs/shadcn/src/index.ts"],
+      "@finx-finance-manager/shadcn/*": ["libs/shadcn/src/*"]
+    }
+  }
+}

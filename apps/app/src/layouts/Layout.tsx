@@ -4,11 +4,11 @@ import Main from './Main';
 
 const Layout = () => {
   return (
-    <CssBaseline enableColorScheme>
-      <Box overflow={'clip'}>
-        <Main />
-      </Box>
-    </CssBaseline>
+    //<CssBaseline enableColorScheme>
+    <Box overflow={'clip'}>
+      <Main />
+    </Box>
+    //</CssBaseline>
   );
 };
 
