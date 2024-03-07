@@ -10,7 +10,7 @@
     "cssVariables": true
   },
   "aliases": {
-    "components": "@finx-finance-manager/shadcn/components",
-    "utils": "@finx-finance-manager/shadcn/utils"
+    "components": "@shadcn/components",
+    "utils": "@shadcn/utils"
   }
 }

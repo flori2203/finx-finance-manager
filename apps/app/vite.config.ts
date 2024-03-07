@@ -12,12 +12,6 @@ export default defineConfig({
     host: 'localhost',
   },
 
-  resolve: {
-    alias: {
-      src: '/src',
-    },
-  },
-
   preview: {
     port: 4300,
     host: 'localhost',

@@ -1,5 +1,5 @@
 import { createTheme, ThemeProvider } from '@mui/material';
-import { createThemePalette } from 'src/context/ThemeContext/theme-palette';
+import { createThemePalette } from '@app/context/ThemeContext/theme-palette';
 import React, { useState, useMemo } from 'react';
 
 declare module '@mui/material/styles' {

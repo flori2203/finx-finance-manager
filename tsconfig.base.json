@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@finx-finance-manager/shadcn": ["libs/shadcn/src/index.ts"]
+      "@shadcn/*": ["libs/shadcn/src/*"],
+      "@app/*": ["apps/app/src/*"],
+      "@api/*": ["apps/api/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
