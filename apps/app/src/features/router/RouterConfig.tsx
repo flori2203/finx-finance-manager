@@ -1,12 +1,12 @@
-import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Layouts from 'src/layouts';
+import Layouts from '@app/layouts';
+import Dashboard from '@app/pages/Dashboard';
 
 const RouterConfig = () => {
   return (
     <Routes>
       <Route path="/" element={<Layouts />}>
-        <Route index element={<div />} />
+        <Route index element={<Dashboard />} />
       </Route>
     </Routes>
   );

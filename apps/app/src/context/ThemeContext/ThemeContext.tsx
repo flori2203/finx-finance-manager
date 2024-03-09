@@ -1,75 +1,73 @@
-import { createTheme, ThemeProvider } from '@mui/material';
-import { createThemePalette } from 'src/context/ThemeContext/theme-palette';
-import React, { useState, useMemo } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
-declare module '@mui/material/styles' {
-  interface Theme {
-    appBarHeight: string;
-  }
+type Theme = 'dark' | 'light' | 'system';
 
-  /*export interface Palette {}
-
-  interface PaletteOptions {}*/
-
-  interface ThemeOptions {
-    appBarHeight: string;
-  }
+interface ThemeProviderProps {
+  children: React.ReactNode;
+  defaultTheme?: Theme;
+  storageKey?: string;
 }
 
-interface ThemeContextData {
-  currentTheme: string;
-  toggleDarkMode: () => void;
-}
+type ThemeProviderState = {
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
+};
 
-const ThemeContext = React.createContext<ThemeContextData>({
-  currentTheme: 'light',
-  toggleDarkMode: () => {
-    console.log('Switch Dark Mode');
-  },
-});
+const initialState: ThemeProviderState = {
+  theme: 'system',
+  setTheme: () => null,
+};
 
-export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = (
-  props
-) => {
-  const [mode, setMode] = useState<string>('light');
+const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
-  const { palette } = useMemo(() => {
-    const palette = createThemePalette(mode);
-    return { palette };
-  }, [mode]);
+export const ThemeProvider = ({
+  children,
+  defaultTheme = 'system',
+  storageKey = 'ui-theme',
+  ...props
+}: ThemeProviderProps) => {
+  const [theme, setTheme] = useState<Theme>(
+    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
+  );
 
-  const theme = createTheme({
-    appBarHeight: '4rem',
-    typography: {
-      fontFamily: [
-        'roboto',
-        'open sans',
-        'Helvetica Neue',
-        'Arial',
-        'sans-serif',
-      ].join(','),
+  useEffect(() => {
+    const root = window.document.documentElement;
+
+    root.classList.remove('light', 'dark');
+
+    if (theme === 'system') {
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
+        .matches
+        ? 'dark'
+        : 'light';
+
+      root.classList.add(systemTheme);
+      return;
+    }
+
+    root.classList.add(theme);
+  }, [theme]);
+
+  const value = {
+    theme,
+    setTheme: (theme: Theme) => {
+      localStorage.setItem(storageKey, theme);
+      setTheme(theme);
     },
-    palette: palette,
-  });
-
-  const toggleDarkModeHandler = () => {
-    setMode((prev) => {
-      const newMode = prev === 'dark' ? 'light' : 'dark';
-      localStorage.setItem('palette-mode', newMode);
-      return newMode;
-    });
-  };
-
-  const contextValue = {
-    toggleDarkMode: toggleDarkModeHandler,
-    currentTheme: mode,
   };
 
   return (
-    <ThemeContext.Provider value={contextValue}>
-      <ThemeProvider theme={theme}>{props.children}</ThemeProvider>
-    </ThemeContext.Provider>
+    <ThemeProviderContext.Provider {...props} value={value}>
+      {children}
+    </ThemeProviderContext.Provider>
   );
 };
 
-export default ThemeContext;
+export const useTheme = () => {
+  const context = useContext(ThemeProviderContext);
+
+  if (context === undefined)
+    throw new Error('useTheme must be used within a ThemeProvider');
+
+  return context;
+};

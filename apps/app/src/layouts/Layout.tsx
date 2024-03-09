@@ -1,14 +1,13 @@
-import React from 'react';
-import { CssBaseline, Box } from '@mui/material';
+import { Box } from '@mui/material';
 import Main from './Main';
+import Appbar from '@app/features/appbar';
 
 const Layout = () => {
   return (
-    <CssBaseline enableColorScheme>
-      <Box overflow={'clip'}>
-        <Main />
-      </Box>
-    </CssBaseline>
+    <Box overflow={'clip'}>
+      <Appbar />
+      <Main />
+    </Box>
   );
 };
 
