@@ -1,13 +1,12 @@
-import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Layouts from '@app/layouts';
-import { Button } from '@shadcn/components/ui/button';
+import Dashboard from '@app/pages/Dashboard';
 
 const RouterConfig = () => {
   return (
     <Routes>
       <Route path="/" element={<Layouts />}>
-        <Route index element={<Button>ClickMe</Button>} />
+        <Route index element={<Dashboard />} />
       </Route>
     </Routes>
   );
