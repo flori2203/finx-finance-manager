@@ -17,6 +17,7 @@
     "paths": {
       "@api/*": ["apps/api/src/*"],
       "@app/*": ["apps/app/src/*"],
+      "@next-app/*": ["apps/next-app/*"],
       "@shadcn/*": ["libs/shadcn/src/*"]
     }
   },

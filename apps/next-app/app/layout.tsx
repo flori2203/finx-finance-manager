@@ -1,5 +1,6 @@
 import './global.css';
 import { ThemeProvider } from './theme-provider';
+import Appbar from '@next-app/features/appBar';
 
 export const metadata = {
   title: 'Welcome to next-app',
@@ -20,6 +21,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Appbar />
           {children}
         </ThemeProvider>
       </body>
