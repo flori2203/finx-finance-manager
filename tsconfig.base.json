@@ -15,9 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@shadcn/*": ["libs/shadcn/src/*"],
+      "@api/*": ["apps/api/src/*"],
       "@app/*": ["apps/app/src/*"],
-      "@api/*": ["apps/api/src/*"]
+      "@shadcn/*": ["libs/shadcn/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
