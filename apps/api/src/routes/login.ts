@@ -24,6 +24,8 @@ router.post('/', async (req, res) => {
     });
   }
 
+  //TODO Encrypt password
+
   if (user.password !== password) {
     return res.status(403).json({
       error: 'invalid login',

@@ -10,6 +10,7 @@ export const initalSetup = async () => {
         name: 'Admin',
         email: 'test@test.de',
         password: 'test',
+        isAdmin: true,
       },
     });
   }

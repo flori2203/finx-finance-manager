@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-export const cookieJwtAuth = (req, res, next) => {
+export const cookieAuth = (req, res, next) => {
   const token = req.cookies.token;
 
   try {
@@ -9,7 +9,7 @@ export const cookieJwtAuth = (req, res, next) => {
     console.log('User is authenticated!');
     next();
   } catch (err) {
-    res.clearCookie('token').status(403).json({
+    res.clearCookie('token').status(401).json({
       error: 'invalid token',
     });
     return;

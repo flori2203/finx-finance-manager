@@ -2,7 +2,7 @@ import express from 'express';
 import { initalSetup } from './initialSetup';
 import cookieParser from 'cookie-parser';
 import { router as loginRouter } from './routes/login';
-import { router as secretRouter } from './routes/secret';
+import { router as authRouter } from './routes/auth';
 
 const app = express();
 app.use(express.json());
@@ -14,8 +14,8 @@ app.use(
 );
 initalSetup();
 
+app.use('/auth', authRouter);
 app.use('/login', loginRouter);
-app.use('/secret', secretRouter);
 
 app.get('/', (req, res) => {
   res.send({ message: 'Startseite' });
