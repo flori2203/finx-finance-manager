@@ -14,23 +14,64 @@ datasource db {
 }
 
 model User {
-    id         Int       @id @default(autoincrement())
-    name       String
-    email      String
-    password   String
-    isAdmin    Boolean   @default(false)
-    nordigenId Int?
-    Nordigen   Nordigen?
+    id       Int     @id @default(autoincrement())
+    name     String
+    email    String
+    password String
+    isAdmin  Boolean @default(false)
+    nordigen Nordigen?
+    accounts Account[]
+    scheduledTransactions scheduledTransaction[]
 }
 
 model Nordigen {
     id           Int      @id @default(autoincrement())
     secretId     String
     secretKey    String
-    accessToken  String
+    token        String
     refreshToken String
     createdAt    DateTime
-    updatedAt    DateTime @updatedAt
-    User         User     @relation(fields: [userId], references: [id])
-    userId       Int      @unique
+    user User @relation(fields: [userId], references: [id])
+    userId Int @unique
+}
+
+model Account {
+    id          Int      @id @default(autoincrement())
+    currency    String
+    balance     Float
+    name        String
+    institutionName String
+    iban        String
+    user User @relation(fields: [userId], references: [id])
+    userId Int
+    transactions Transaction[]
+}
+
+model Transaction {
+    id          Int      @id @default(autoincrement())
+    amount      Float
+    currency    String
+    date        DateTime
+    description String
+    sender      String
+    receiver    String
+    type        String
+    account Account @relation(fields: [accountId], references: [id])
+    accountId Int
+    scheduledTransaction scheduledTransaction @relation(fields: [scheduledTransactionId], references: [id])
+    scheduledTransactionId Int
+}
+
+model scheduledTransaction {
+    id          Int      @id @default(autoincrement())
+    amount      Float
+    currency    String
+    cron        String
+    description String
+    sender      String
+    receiver    String
+    type        String
+    user User @relation(fields: [userId], references: [id])
+    userId Int
+    transaction Transaction[]
 }
