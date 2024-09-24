@@ -18,7 +18,7 @@ app.use('/auth', authRouter);
 app.use('/login', loginRouter);
 
 app.get('/', (req, res) => {
-  res.send({ message: 'Startseite' });
+  res.send({ message: 'Main Page' });
 });
 
 app.listen(3000, () => {
